@@ -20,6 +20,12 @@ const registerRouter = require('./routes/api/register');
 app.use('/api/', loginRouter);
 app.use('/api/', registerRouter);
 
+app.get('/api/message', loginRequired, ensureCorrectUser, (req, res) => {
+  console.log('hii');
+  
+  return res.json("hii");
+});
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
