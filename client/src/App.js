@@ -1,10 +1,9 @@
 import React from 'react';
-import Menu from './components/menu';
+import Switching from './components/Switching';
+
 const App = () => {
     return(
-        <div>
-            <Menu />
-        </div>
+        <Switching />
     )
 }
 
