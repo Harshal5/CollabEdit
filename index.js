@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const { loginRequired, ensureCorrectUser } = require('./middleware/auth') 
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -8,7 +9,7 @@ app.use(bodyParser.json());
 
 const db = require("./config").mongoURI;
 
-mongoose.connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true })
+mongoose.connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true, useCreateIndex: true })
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 mongoose.set("useFindAndModify", false);

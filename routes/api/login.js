@@ -10,43 +10,46 @@ router.post("/login", async (req, res) => {
     
     const email = req.body.email;
     const password = req.body.password;
+    console.log(req.body);
+    
+    try{
+        const user = await User.findOne({email}) 
+        if(!user){
+            return res.json({message: 'User not found'});
+        }
+        bcrypt.compare(password, user.password, function(err, isMatch) {
+            console.log(isMatch);
+            if (err){
+                // handle error
+                return res.status(400).json({ err: e });
+            }
+            if (isMatch){
+                // Send JWT
+                const name = user.name;
+                console.log(name);
+                
+                const payload = {
+                    name,
+                    email
+                };
+                let token =  jwt.sign(payload ,config.secret);
+                return res.status(200).json({
+                    name,
+                    email,
+                    token
+                });
+            } else {
+                // response is OutgoingMessage object that server response http request
+                return res.json({success: false, message: 'passwords do not match'});
+            }
+        });
+           
 
-    User.findOne({ email }).then(user => {
-    if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+    } catch(e){
+        return res.status(400).json({ err: e });
     }
-    bcrypt.compare(password, user.password).then(isMatch => {
-        if (isMatch) {
-            const payload = {
-                id: user.id,
-                name: user.name
-        };
-        console.log(config.secret);
-        
-        jwt.sign(
-            payload,
-            config.secret,
-            {
-                expiresIn: 3600
-            },
-            (err, token) => {
-                res
-                    .status(200)
-                    .json({
-                        token,
-                        user_details: {
-                            userId: user.name
-                        }
-                    });
-            }
-        );
-        } else {
-            return res
-                .status(400)
-                .json({ passwordincorrect: "Password incorrect" });
-            }
-    });
-    });
+
+    
 });
 
 module.exports = router;
