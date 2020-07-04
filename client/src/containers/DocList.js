@@ -14,9 +14,9 @@ class DocList extends Component {
         key={d._id}
         date={d.createAt}
         text={d.text}
-        username={d.user.name}
-        // removeDoc={removeDoc.bind(this, d.user._id, d._id)}
-        // isCorrectUser={currentUser === d.user._id}
+        name={d.user.name}
+        removeDoc={removeDoc.bind(this, d.user._id, d._id)}
+        isCorrectUser={currentUser === d.user._id}
       />
     ));
     return (

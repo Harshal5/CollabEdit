@@ -9,7 +9,7 @@ const Homepage = ({ currentUser }) => {
                 <h1>What's Happening?</h1>
                 <h4>New to Warbler?</h4>
                 <Link to="/register" className="btn btn-primary">
-                    Sign up here
+                    Register here
                 </Link>
             </div>
         );
@@ -17,7 +17,7 @@ const Homepage = ({ currentUser }) => {
     
   return (
     <div>
-        <h1>You have made it!!</h1>
+        {/* <h1>You have made it!!</h1> */}
       <DocTimeline
         name={currentUser.user.name}
       />

@@ -15,14 +15,14 @@ class Navbar extends Component {
                  <div className="container-fluid">
                      <div className="navbar-header">
                          <Link to="/" className="navbar-brand">
-                             Home
+                            Home
                          </Link>
                      </div>
                      {this.props.currentUser.isAuthenticated ? (
                          <ul className="nav navbar-nav navbar-right">
                              <li>
                                 <Link
-                                to={`/users/${this.props.currentUser.user.name}/messages/new`}
+                                to={`/users/${this.props.currentUser.user.id}/docs/new`}
                                 >
                                 New Message
                                 </Link>

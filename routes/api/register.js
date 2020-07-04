@@ -9,8 +9,9 @@ router.post("/register", async (req, res, next) => {
   try{
     // let { name, email, password } = req.body;
     let user = await User.create(req.body);
-    let { name, email } = user;
+    let { id, name, email } = user;
     const payload = {
+      id,
       name, 
       email
     };
@@ -18,6 +19,7 @@ router.post("/register", async (req, res, next) => {
     let token = jwt.sign(payload ,config.secret);
     // console.log(user);
     return res.status(200).json({
+      id,
       name,
       email,
       token

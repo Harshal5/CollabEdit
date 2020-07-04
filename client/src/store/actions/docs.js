@@ -33,3 +33,11 @@ export const fetchDocs = () => {
         });
     };
 };
+
+export const postNewDoc = text => (dispatch, getState) => {
+  let { currentUser } = getState();
+  const id = currentUser.user.id;
+  return apiCall("post", `/api/users/${id}/docs`, { text })
+    .then(res => {})
+    .catch(err => dispatch(addError(err.message)));
+};

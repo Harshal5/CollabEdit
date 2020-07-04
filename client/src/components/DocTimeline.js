@@ -1,16 +1,16 @@
 import React from "react";
-import DocsList from "../containers/DocsList";
+import DocList from "../containers/DocList";
 import UserAside from "./UserAside";
 
-const DocsTimeline = props => {
+const DocTimeline = props => {
   return (
     <div className="row">
       <UserAside
         name={props.name}
       />
-      <DocsList />
+      <DocList />
     </div>
   );
 };
 
-export default DocsTimeline;
+export default DocTimeline;

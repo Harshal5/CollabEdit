@@ -11,16 +11,18 @@ router.post("/login", async (req, res, next) => {
     
     try{
         let user = await User.findOne({email: req.body.email});
-        let { name, email } = user;
+        let { id, name, email } = user;
         let isMatch = await user.comparePassword(req.body.password);
         console.log(isMatch);
         if (isMatch){            
             const payload = {
+                id,
                 name,
                 email
             };
             let token =  jwt.sign(payload ,config.secret);
             return res.status(200).json({
+                id,
                 name,
                 email,
                 token
