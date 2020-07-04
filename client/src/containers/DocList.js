@@ -12,7 +12,7 @@ class DocList extends Component {
     let docList = docs.map(d => (
       <DocItem
         key={d._id}
-        date={d.createAt}
+        date={d.createdAt}
         text={d.text}
         name={d.user.name}
         removeDoc={removeDoc.bind(this, d.user._id, d._id)}

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth') 
 const errorHandler = require('./middleware/errorHandler');
+const Doc = require("./models/Doc.model");
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -17,13 +18,30 @@ mongoose.set("useFindAndModify", false);
 const loginRouter = require('./routes/api/login');
 const registerRouter = require('./routes/api/register'); 
 const docsRouter = require('./routes/api/docs');
-const homeRouter = require('./routes/api/home');
+// const homeRouter = require('./routes/api/home');
 
 app.use('/api/', loginRouter);
 app.use('/api/', registerRouter);
-app.use('/api/docs', loginRequired, homeRouter);
+// app.use('/api/docs', loginRequired, homeRouter);
 app.use('/api/users/:id/docs', loginRequired, ensureCorrectUser, docsRouter);
 
+app.get("/api/docs/", loginRequired, async (req, res, next) => {
+  try {
+    console.log("in");
+
+      let docs = await Doc.find({})
+        .sort({ createdAt: "desc" })
+        .populate("user", {
+          username: true,
+          email: true
+        });
+      
+      return res.status(200).json(docs);
+  } catch (err) {
+      return next(err);
+  }
+
+});
 
 app.use(function(req, res, next){
   let err = new Error("Not Found");

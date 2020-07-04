@@ -1,16 +1,19 @@
 const express = require("express");
-const router = express.Router();
-
+const router = express.Router({mergeParams: true});
+const mongoose = require('mongoose')
 const User = require("../../models/User.model");
 const Doc = require("../../models/Doc.model");
 
-router.post("/", async (req, res, next) => {
+router.post("/new", async (req, res, next) => {
     try {
+        // console.log(req.params.id);
+        
         let doc = await Doc.create({
             text: req.body.text,
-            user: req.params.id
+            user:  mongoose.Types.ObjectId(req.params.id)
         });
         let foundUser = await User.findById(req.params.id);
+        // console.log(foundUser);
         foundUser.docs.push(doc.id);
         await foundUser.save();
         let foundDoc = await Doc.findById(doc._id).populate("user", {
