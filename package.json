@@ -19,7 +19,9 @@
     "express": "^4.17.1",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.21"
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.21",
+    "react-moment": "^0.9.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

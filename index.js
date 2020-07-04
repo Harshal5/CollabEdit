@@ -24,12 +24,6 @@ app.use('/api/', registerRouter);
 app.use('/api/docs', loginRequired, homeRouter);
 app.use('/api/users/:id/docs', loginRequired, ensureCorrectUser, docsRouter);
 
-app.get('/api/message', loginRequired, ensureCorrectUser, (req, res) => {
-  console.log('hii');
-  
-  return res.json("hii");
-});
-
 
 app.use(function(req, res, next){
   let err = new Error("Not Found");

@@ -12,9 +12,19 @@ export const remove = id => ({
     id
 });
 
+export const removeDoc = (user_id, doc_id) => {
+  return dispatch => {
+    return apiCall("delete", `/api/users/${user_id}/docs/${doc_id}`)
+      .then(() => dispatch(remove(doc_id)))
+      .catch(err => {
+        addError(err.message);
+      });
+  };
+};
+
 export const fetchDocs = () => {
     return dispatch => {
-      return apiCall("GET", "/api/docs")
+      return apiCall("get", "/api/docs")
         .then(res => {
           dispatch(loadDocs(res));
         })

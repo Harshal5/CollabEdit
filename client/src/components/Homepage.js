@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// // import MessageTimeline from "./MessageTimeline";
+import DocTimeline from './DocTimeline';
 
 const Homepage = ({ currentUser }) => {
     if (!currentUser.isAuthenticated) {
@@ -18,10 +18,9 @@ const Homepage = ({ currentUser }) => {
   return (
     <div>
         <h1>You have made it!!</h1>
-      {/* <MessageTimeline
-        profileImageUrl={currentUser.user.profileImageUrl}
-        username={currentUser.user.username}
-      /> */}
+      <DocTimeline
+        name={currentUser.user.name}
+      />
     </div>
   );
 };
