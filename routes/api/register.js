@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-
 const jwt = require("jsonwebtoken");
 
 const User = require("../../models/User.model");
@@ -9,34 +7,16 @@ const config = require("../../config");
 
 router.post("/register", async (req, res, next) => {
   try{
-    let { name, email, password } = req.body;
-    const newUser = new User({
-      name: name,
-      email: email,
-      password: password
-    });
-    
-    // bcrypt.genSalt(10, (err, salt) => {
-    //     bcrypt.hash(newUser.password, salt, (err, hash) => {
-    //       if (err) throw err;
-    //       newUser.password = hash;
-    //       newUser.save();
-    //     });
-    // });
-    
-    let hashedPassword = await bcrypt.hash(newUser.password, 10);
-    newUser.password = hashedPassword;
-    newUser.save();
-    console.log(newUser);
-
-
+    // let { name, email, password } = req.body;
+    let user = await User.create(req.body);
+    let { name, email } = user;
     const payload = {
       name, 
       email
     };
 
-    let token = await jwt.sign(payload ,config.secret);
-    // console.log(newUser);
+    let token = jwt.sign(payload ,config.secret);
+    // console.log(user);
     return res.status(200).json({
       name,
       email,
@@ -51,7 +31,7 @@ router.post("/register", async (req, res, next) => {
     
     return next({
       status: 400,
-      message: err.message
+      message: err.message 
     });
   }
 
