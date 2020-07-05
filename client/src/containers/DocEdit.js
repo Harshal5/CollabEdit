@@ -1,20 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchDoc, updateInput, updateTheDoc } from '../store/actions/doc';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import  { Redirect } from 'react-router-dom'
+import socketIOClient from 'socket.io-client';
+const ENDPOINT = "http://localhost:5000";
+// import ReactQuill from 'react-quill';
+// import 'react-quill/dist/quill.snow.css';
 
 class DocEdit extends Component {
 
-    // constructor(props){
-    //     super(props);
-    //     // this.state= {
-    //     //     doc: ''
-    //     // };
-    //     // this.props.fetchDoc(this.props.match.params.docId);
-    // }
+    constructor(props){
+        super(props);
+        // this.state= {
+        //     doc: ''
+        // };
+        // this.props.fetchDoc(this.props.match.params.docId);
+    }
     componentDidMount() {
         this.props.fetchDoc(this.props.match.params.docId);
+        // const socket = socketIOClient(ENDPOINT);
+        // socket.emit("initial_data");
         // this.state= {
         //     doc: this.props.doc
         // };
@@ -37,9 +42,11 @@ class DocEdit extends Component {
         // this.props.postNewDoc(this.state.newdoc);
         // console.log(event.target.value);
         // this.setState({ doc: value });
-        this.props.updateTheDoc(this.props.match.params.docId);
         event.preventDefault();
+        this.props.updateTheDoc(this.props.match.params.docId);
         this.props.history.push("/");
+        
+        // <Redirect to='/'  />
     }
     
     handleChange = (event)=> {

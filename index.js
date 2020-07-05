@@ -5,6 +5,9 @@ const { loginRequired, ensureCorrectUser } = require('./middleware/auth')
 const errorHandler = require('./middleware/errorHandler');
 const Doc = require("./models/Doc.model");
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -14,6 +17,10 @@ mongoose.connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true, useCreate
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 mongoose.set("useFindAndModify", false);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
 
 const loginRouter = require('./routes/api/login');
 const registerRouter = require('./routes/api/register'); 

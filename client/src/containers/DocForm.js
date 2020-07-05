@@ -17,10 +17,10 @@ class DocForm extends Component {
   // }
 
 
-  handleNewDoc = async(event) => {
+  handleNewDoc = (event) => {
     event.preventDefault();
-    await this.props.postNewDoc(this.state.newdoc);
-    this.setState({ newdoc: "" });
+    this.props.postNewDoc(this.state.newdoc);
+    // this.setState({ newdoc: "" });
     this.props.history.push("/");
   };
 

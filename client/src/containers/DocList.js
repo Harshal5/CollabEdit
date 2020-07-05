@@ -4,7 +4,10 @@ import { fetchDocs, removeDoc } from "../store/actions/docs";
 import DocItem from "../components/DocItem";
 
 class DocList extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    console.log("This is a bug PLEASE REFRESH :)");
+
     this.props.fetchDocs();
   }
   render() {

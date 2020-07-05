@@ -5,7 +5,7 @@ const UserAside = ({ name }) => (
     <div className="panel panel-default">
       <div className="panel-body">
         <img
-          src={''}
+          src=""
           alt={name}
           width="200"
           height="200"
