@@ -7,7 +7,7 @@ export const loadEditors = editors => ({
     editors
 });
 
-export const fetchEditors = () => {
+export const fetchEditors = (user_id, doc_id) => {
     return dispatch => {
       return apiCall("get", "/api/editors")
         .then(res => {

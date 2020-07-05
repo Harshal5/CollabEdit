@@ -1,6 +1,7 @@
 import React from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
+import Parser from 'html-react-parser';
 
 const DocItem = ({
   docId,
@@ -27,7 +28,7 @@ const DocItem = ({
             {date}
           </Moment>
         </span>
-        <p>{text}</p>
+        <p>{Parser(text)}</p>
         {isCorrectUser ? (
           <div>          
             <Link to={`/docs/${docId}/edit`} className="btn btn-outline-primary">
