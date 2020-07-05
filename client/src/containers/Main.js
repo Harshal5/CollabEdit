@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import HomePage from '../components/Homepage';
 import AuthForm from '../components/AuthForm';
@@ -7,6 +7,7 @@ import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
 import withAuth from "../hocs/withAuth";
 import DocForm from "../containers/DocForm";
+import DocEdit from "../containers/DocEdit";
 
 const Main = props => {
     const { authUser, errors, removeError, currentUser } = props;
@@ -50,6 +51,10 @@ const Main = props => {
                 <Route
                     path="/users/:id/docs/new"
                     component={withAuth(DocForm)}
+                />
+                <Route
+                    path="/docs/:docId/edit"
+                    component={withAuth(DocEdit)}
                 />
             </Switch>
         </div>

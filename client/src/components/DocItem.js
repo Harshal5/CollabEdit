@@ -3,11 +3,13 @@ import Moment from "react-moment";
 import { Link } from "react-router-dom";
 
 const DocItem = ({
+  docId,
   date,
   text,
   name,
   removeDoc,
   isCorrectUser
+  // isCurrentUserAuthenticated
 }) => (
   <div>
     <li className="list-group-item">
@@ -26,11 +28,16 @@ const DocItem = ({
           </Moment>
         </span>
         <p>{text}</p>
-        {isCorrectUser && (
-          <a className="btn btn-danger" onClick={removeDoc}>
-            Delete
-          </a>
-        )}
+        {isCorrectUser ? (
+          <div>          
+            <Link to={`/docs/${docId}/edit`} className="btn btn-outline-primary">
+              Edit
+            </Link>
+            <button type="button" className="btn btn-outline-danger" onClick={removeDoc}>
+              Delete
+            </button>
+          </div>
+        ) : (null)}
       </div>
     </li>
   </div>

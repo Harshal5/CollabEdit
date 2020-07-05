@@ -12,11 +12,13 @@ class DocList extends Component {
     let docList = docs.map(d => (
       <DocItem
         key={d._id}
+        docId={d._id}
         date={d.createdAt}
         text={d.text}
         name={d.user.name}
         removeDoc={removeDoc.bind(this, d.user._id, d._id)}
-        isCorrectUser={currentUser === d.user._id}
+        isCorrectUser={currentUser.user.id === d.user._id}
+        // isCurrentUserAuthenticated={currentUser.isAuthenticated}
       />
     ));
     return (
@@ -34,7 +36,7 @@ class DocList extends Component {
 function mapStateToProps(state) {
   return {
     docs: state.docs,
-    currentUser: state.currentUser.user.id
+    currentUser: state.currentUser
   };
 }
 
