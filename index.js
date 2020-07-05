@@ -27,8 +27,7 @@ app.use('/api/users/:id/docs', loginRequired, ensureCorrectUser, docsRouter);
 
 app.get("/api/docs/", loginRequired, async (req, res, next) => {
   try {
-    console.log("in");
-
+      console.log("in");
       let docs = await Doc.find({})
         .sort({ createdAt: "desc" })
         .populate("user", {
@@ -41,6 +40,17 @@ app.get("/api/docs/", loginRequired, async (req, res, next) => {
       return next(err);
   }
 
+});
+
+app.get('/api/docs/:doc_id/', async (req, res, next) => {
+  try {
+    console.log("found doc");
+    let doc = await Doc.findById(req.params.doc_id);
+    return res.status(200).json(doc);
+  } catch (err) {
+    console.log("doc not found");
+    return next(err);
+  }
 });
 
 app.use(function(req, res, next){

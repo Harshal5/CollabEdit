@@ -27,14 +27,14 @@ router.post("/new", async (req, res, next) => {
 
 });
 
-router.get("/:doc_id", async (req, res, next) => {
-    try {
-        let doc = await Doc.find(req.params.doc_id);
-        return res.status(200).json(doc);
-    } catch (err) {
-        return next(err);
-    }
-});
+// router.get("/:doc_id", async (req, res, next) => {
+//     try {
+//         let doc = await Doc.find(req.params.doc_id);
+//         return res.status(200).json(doc);
+//     } catch (err) {
+//         return next(err);
+//     }
+// });
 
 router.delete("/:doc_id", async (req, res, next) => {
     try {

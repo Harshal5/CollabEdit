@@ -8,20 +8,20 @@ class DocForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      doc: ""
+      newdoc: ""
     };
 
   }
 
   handleNewDoc = event => {
     event.preventDefault();
-    this.props.postNewDoc(this.state.doc);
-    this.setState({ doc: "" });
+    this.props.postNewDoc(this.state.newdoc);
+    this.setState({ newdoc: "" });
     this.props.history.push("/");
   };
 
   handleChange = (value) => {
-    this.setState({ doc: value });
+    this.setState({ newdoc: value });
   }
 
   render() {
@@ -31,7 +31,7 @@ class DocForm extends Component {
           <div className="alert alert-danger">{this.props.errors.message}</div>
         )}
          <ReactQuill 
-            value={this.state.doc} 
+            value={this.state.newdoc} 
             onChange={this.handleChange} 
           />
         {/* <input
