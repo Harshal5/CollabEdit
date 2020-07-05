@@ -14,13 +14,15 @@ const DocItem = ({
 }) => (
   <div>
     <li className="list-group-item">
-      <img
+      {/* <img
         src={''}
         alt={name}
         height="100"
         width="100"
         className="timeline-image"
-      />
+      /> */}
+      {/* {console.log(name)} */}
+      
       <div className="message-area">
         <Link to="/">@{name} &nbsp;</Link>
         <span className="text-muted">
@@ -28,7 +30,7 @@ const DocItem = ({
             {date}
           </Moment>
         </span>
-        <p>{Parser(text)}</p>
+        {Parser(text)}
         {isCorrectUser ? (
           <div>          
             <Link to={`/docs/${docId}/edit`} className="btn btn-outline-primary">

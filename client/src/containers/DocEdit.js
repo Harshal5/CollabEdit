@@ -15,8 +15,11 @@ class DocEdit extends Component {
     }
     componentDidMount() {
         this.props.fetchDoc(this.props.match.params.docId);
-        console.log(this.props);
-        // this.setState({ doc: })
+        // console.log(this.props);
+    }
+
+    componentDidUpdate() {
+
     }
     
     // handleChange = (value) => {
@@ -39,14 +42,15 @@ class DocEdit extends Component {
 
     render() {
         // const { currentUser } = this.props;
-        // console.log(this.props.doc.text);
-        
+        console.log(this.props.doc.text);
+        // const initial = this.props.doc.text;
+    
         return(
             <form onSubmit={this.handleUpdateDoc}>
                 {this.props.errors.message && (
                     <div className="alert alert-danger">{this.props.errors.message}</div>
                 )}
-                <ReactQuill
+                {/* <ReactQuill
                     value={this.props.doc.text} 
                     onChange={ value => {
                             console.log(value);
@@ -55,7 +59,15 @@ class DocEdit extends Component {
                             // console.log(cleanedValue);
                         }
                     }
+                /> */}
+
+                <input
+                    type="text"
+                    className="form-control"
+                    value={this.state.doc.text}
+                    onChange={ e => this.setState({doc: e.target.value})}
                 />
+                
                 <button type="submit" className="btn btn-success">
                     Update my Document!
                 </button>

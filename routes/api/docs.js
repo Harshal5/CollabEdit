@@ -17,7 +17,7 @@ router.post("/new", async (req, res, next) => {
         foundUser.docs.push(doc.id);
         await foundUser.save();
         let foundDoc = await Doc.findById(doc._id).populate("user", {
-            username: true,
+            name: true,
             email: true
         });
         return res.status(200).json(foundDoc);

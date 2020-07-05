@@ -3,13 +3,13 @@ const router = express.Router({mergeParams:true});
 
 const User = require("../../models/User.model");
 const Doc = require("../../models/Doc.model");
-
+  
 router.post("/", async (req, res, next) => {
     try {
         let docs = await Doc.find({})
           .sort({ createdAt: "desc" })
           .populate("user", {
-            username: true,
+            name: true,
             email: true
           });
         console.log("in");

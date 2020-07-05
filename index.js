@@ -31,9 +31,10 @@ app.get("/api/docs/", loginRequired, async (req, res, next) => {
       let docs = await Doc.find({})
         .sort({ createdAt: "desc" })
         .populate("user", {
-          username: true,
+          name: true,
           email: true
         });
+      console.log(docs);
       
       return res.status(200).json(docs);
   } catch (err) {
