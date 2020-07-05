@@ -1,26 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchDoc } from '../store/actions/doc';
+import { fetchDoc, updateInput, updateTheDoc } from '../store/actions/doc';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 class DocEdit extends Component {
 
-    constructor(props){
-        super(props);
-        this.state= {
-            doc: ''
-        };
-        // this.props.fetchDoc(this.props.match.params.docId);
-    }
+    // constructor(props){
+    //     super(props);
+    //     // this.state= {
+    //     //     doc: ''
+    //     // };
+    //     // this.props.fetchDoc(this.props.match.params.docId);
+    // }
     componentDidMount() {
         this.props.fetchDoc(this.props.match.params.docId);
-        // console.log(this.props);
+        // this.state= {
+        //     doc: this.props.doc
+        // };
+        // console.log(this.props.doc);
     }
 
-    componentDidUpdate() {
+    // componentDidUpdate() {
 
-    }
+    // }
     
     // handleChange = (value) => {
     //     // this.setState({ doc: value });
@@ -33,16 +36,21 @@ class DocEdit extends Component {
     handleUpdateDoc = (event) => {
         // this.props.postNewDoc(this.state.newdoc);
         // console.log(event.target.value);
-        event.preventDefault();
-        
         // this.setState({ doc: value });
+        this.props.updateTheDoc(this.props.match.params.docId);
+        event.preventDefault();
         this.props.history.push("/");
+    }
+    
+    handleChange = (event)=> {
+        this.props.updateInput(event.target.value)
+        // console.log(this.props.doc);
     }
 
 
     render() {
         // const { currentUser } = this.props;
-        console.log(this.props.doc.text);
+        console.log(this.props.doc);
         // const initial = this.props.doc.text;
     
         return(
@@ -64,8 +72,8 @@ class DocEdit extends Component {
                 <input
                     type="text"
                     className="form-control"
-                    value={this.state.doc.text}
-                    onChange={ e => this.setState({doc: e.target.value})}
+                    value={this.props.doc}
+                    onChange={ this.handleChange}
                 />
                 
                 <button type="submit" className="btn btn-success">
@@ -84,5 +92,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { fetchDoc })(DocEdit);
+export default connect(mapStateToProps, { fetchDoc, updateInput, updateTheDoc })(DocEdit);
 // export default connect(mapStateToProps, null)(DocEdit);

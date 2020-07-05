@@ -5,3 +5,5 @@ export const LOAD_DOCS = "LOAD_DOCS";
 export const REMOVE_DOC = "REMOVE_DOC";
 export const POST_DOC = "POST_DOC";
 export const LOAD_DOC = "LOAD_DOC";
+export const UPDATE_INPUT = "UPDATE_INPUT";
+export const UPDATE_DOC = "UPDATE_DOC";

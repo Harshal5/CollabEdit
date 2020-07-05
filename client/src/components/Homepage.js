@@ -6,8 +6,8 @@ const Homepage = ({ currentUser }) => {
     if (!currentUser.isAuthenticated) {
         return (
             <div className="home-hero">
-                <h1>What's Happening?</h1>
-                <h4>New to Warbler?</h4>
+                <h1>Hey, Welcome!!!</h1>
+                <h4>New to CollabEdit?</h4>
                 <Link to="/register" className="btn btn-primary">
                     Register here
                 </Link>

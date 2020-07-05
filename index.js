@@ -54,6 +54,23 @@ app.get('/api/docs/:doc_id/', async (req, res, next) => {
   }
 });
 
+app.post('/api/docs/:doc_id/', async (req, res, next) => {
+  try {
+    console.log("IN update");
+    let doc = await Doc.updateOne({"_id":req.params.doc_id}, 
+      {$set : {
+        text : req.body.text
+      }}
+    );
+    return res.status(200).json(doc);
+    
+  }catch (err) {
+    console.log("Update fail");
+    return next(err);
+  }
+});
+
+
 app.use(function(req, res, next){
   let err = new Error("Not Found");
   err.status = 404;
