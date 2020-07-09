@@ -20,6 +20,7 @@ router.post("/new", async (req, res, next) => {
             name: true,
             email: true
         });
+        // console.log(foundDoc);
         return res.status(200).json(foundDoc);
     } catch (err) {
         return next(err);
@@ -38,8 +39,11 @@ router.post("/new", async (req, res, next) => {
 
 router.delete("/:doc_id", async (req, res, next) => {
     try {
-        let foundDoc = await Doc.findById(req.params.doc_id);
-        await foundDoc.remove();
+        // let foundDoc = await Doc.findById(req.params.doc_id);
+        // await foundDoc.remove();
+        
+        let foundDoc = await Doc.findByIdAndDelete(req.params.doc_id);
+        // console.log(foundDoc);
         return res.status(200).json(foundDoc);
     } catch (err) {
         return next(err);

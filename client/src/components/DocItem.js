@@ -31,7 +31,7 @@ const DocItem = ({
           </Moment>
         </span>
         <p>{Parser(text)}</p>
-        {isCorrectUser ? (
+        {/* {isCorrectUser ? ( */}
           <div>          
             <Link to={`/docs/${docId}/edit`} className="btn btn-outline-primary">
               Edit
@@ -40,7 +40,7 @@ const DocItem = ({
               Delete
             </button>
           </div>
-        ) : (null)}
+        {/* ) : (null)} */}
       </div>
     </li>
   </div>

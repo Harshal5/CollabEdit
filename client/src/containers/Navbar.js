@@ -24,7 +24,7 @@ class Navbar extends Component {
                                 <Link
                                 to={`/users/${this.props.currentUser.user.id}/docs/new`}
                                 >
-                                New Message
+                                New Document
                                 </Link>
                             </li>
                             <li>

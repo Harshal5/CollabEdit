@@ -7,8 +7,7 @@ class AuthForm extends Component {
     this.state = {
       email: "",
       name: "",
-      password: "",
-    //   profileImageUrl: ""
+      password: ""
     };
   }
 
@@ -40,8 +39,8 @@ handleSubmit = e => {
             removeError
         } = this.props;
       
-        history.listen(() => {  //for aany change in the route
-            removeError();
+        history.listen(() => {  // for aany change in the route
+            removeError();      // removes any existing errors
         });
       
         return (

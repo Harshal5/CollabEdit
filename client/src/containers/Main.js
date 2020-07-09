@@ -50,7 +50,7 @@ const Main = props => {
                 />
                 <Route
                     path="/users/:id/docs/new"
-                    component={withAuth(DocForm)}
+                    component={DocForm}
                 />
                 <Route
                     path="/docs/:docId/edit"

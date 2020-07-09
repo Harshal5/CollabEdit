@@ -10,7 +10,7 @@ exports.loginRequired = function(req, res, next) {
       } else {
         console.log("Please Log In First");
         // return res.status(400).json({ err: "Please Log In First" })
-        return next({ status: 401, message: "TryElse: Please Log In First" });
+        return next({ status: 401, message: "Try Else: Please Log In First" });
       }
     });
   } catch (e) {

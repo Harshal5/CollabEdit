@@ -18,16 +18,16 @@ const docSchema = new mongoose.Schema(
     }
 );
 
-docSchema.pre("remove", async function(next) {
-    try {
-        let user = await User.findById(this.user);
-        user.docs.remove(this.id);
-        await user.save();
-        return next();
-    } catch (err) {
-        return next(err);
-    }
-});
+// docSchema.pre("remove", async function(next) {
+//     try {
+//         let user = await User.findById(this.user);
+//         user.docs.remove(this.id);
+//         await user.save();
+//         return next();
+//     } catch (err) {
+//         return next(err);
+//     }
+// });
 
 const Doc = mongoose.model("Doc", docSchema);
 module.exports = Doc;

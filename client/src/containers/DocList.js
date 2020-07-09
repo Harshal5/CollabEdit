@@ -4,12 +4,12 @@ import { fetchDocs, removeDoc } from "../store/actions/docs";
 import DocItem from "../components/DocItem";
 
 class DocList extends Component {
-  constructor(props) {
-    super(props);
-    console.log("This is a bug PLEASE REFRESH :)");
+  
 
+  componentDidMount(){
     this.props.fetchDocs();
   }
+
   render() {
     const { docs, removeDoc, currentUser } = this.props;
     let docList = docs.map(d => (

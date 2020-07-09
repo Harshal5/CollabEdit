@@ -17,7 +17,7 @@ const Homepage = ({ currentUser }) => {
     
   return (
     <div>
-        {/* <h1>You have made it!!</h1> */}
+        {/* <h1>inside else!</h1> */}
       <DocTimeline
         name={currentUser.user.name}
       />

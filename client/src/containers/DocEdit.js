@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchDoc, updateInput, updateTheDoc } from '../store/actions/doc';
 import  { Redirect } from 'react-router-dom'
-import socketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
 const ENDPOINT = "http://localhost:5000";
 // import ReactQuill from 'react-quill';
 // import 'react-quill/dist/quill.snow.css';
+
+
 
 class DocEdit extends Component {
 
     constructor(props){
         super(props);
+        // let socket;
+        
         // this.state= {
         //     doc: ''
         // };
@@ -18,6 +22,16 @@ class DocEdit extends Component {
     }
     componentDidMount() {
         this.props.fetchDoc(this.props.match.params.docId);
+       
+        this.socket = io.connect(ENDPOINT);
+        this.socket.on('updatemessage', message => {
+            console.log(message);
+            this.props.updateInput(message);
+            // outputMessage(message);
+            
+            // Scroll down
+            // chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
         // const socket = socketIOClient(ENDPOINT);
         // socket.emit("initial_data");
         // this.state= {
@@ -51,13 +65,21 @@ class DocEdit extends Component {
     
     handleChange = (event)=> {
         this.props.updateInput(event.target.value)
-        // console.log(this.props.doc);
+        // console.log(event.target.value);
+        this.socket.emit('message', event.target.value, (error) => {
+            // console.log(event.target.value);
+            
+            if(error) {
+              alert(error);
+            }
+        });
+        
     }
 
 
     render() {
         // const { currentUser } = this.props;
-        console.log(this.props.doc);
+        // console.log(this.props.doc);
         // const initial = this.props.doc.text;
     
         return(
