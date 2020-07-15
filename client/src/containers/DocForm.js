@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postNewDoc } from "../store/actions/docs";
-// import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 class DocForm extends Component {
   constructor(props) {
@@ -24,9 +24,9 @@ class DocForm extends Component {
     this.props.history.push("/");
   };
 
-  // handleChange = (value) => {
-  //   this.setState({ newdoc: value });
-  // }
+  handleChange = (value) => {
+    this.setState({ newdoc: value });
+  }
 
   render() {
     return (
@@ -34,16 +34,16 @@ class DocForm extends Component {
         {this.props.errors.message && (
           <div className="alert alert-danger">{this.props.errors.message}</div>
         )}
-         {/* <ReactQuill 
+         <ReactQuill 
             value={this.state.newdoc} 
             onChange={this.handleChange} 
-          /> */}
-        <input
+          />
+        {/* <input
           type="text"
           className="form-control"
           value={this.state.newdoc}
           onChange={e => this.setState({ newdoc: e.target.value })}
-        />
+        /> */}
         <button type="submit" className="btn btn-success">
           Add my Document!
         </button>

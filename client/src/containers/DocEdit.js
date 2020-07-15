@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { fetchDoc, updateInput, updateTheDoc } from '../store/actions/doc';
 import  { Redirect } from 'react-router-dom'
 import io from 'socket.io-client';
-const ENDPOINT = "http://localhost:5000";
-// import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
+const ENDPOINT = "http://localhost:5000";
 
 
 class DocEdit extends Component {
@@ -63,10 +63,10 @@ class DocEdit extends Component {
         // <Redirect to='/'  />
     }
     
-    handleChange = (event)=> {
-        this.props.updateInput(event.target.value)
+    handleChange = (value)=> {
+        this.props.updateInput(value)
         // console.log(event.target.value);
-        this.socket.emit('message', event.target.value, (error) => {
+        this.socket.emit('message', value, (error) => {
             // console.log(event.target.value);
             
             if(error) {
@@ -98,13 +98,18 @@ class DocEdit extends Component {
                     }
                 /> */}
 
-                <input
+                {/* <input
                     type="text"
                     className="form-control"
                     value={this.props.doc}
                     onChange={ this.handleChange}
-                />
+                /> */}
                 
+                <ReactQuill 
+                    value={this.props.doc} 
+                    onChange={this.handleChange} 
+                />
+
                 <button type="submit" className="btn btn-success">
                     Update my Document!
                 </button>

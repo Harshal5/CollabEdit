@@ -30,7 +30,8 @@ const DocItem = ({
             {date}
           </Moment>
         </span>
-        <p>{Parser(text)}</p>
+        {Parser(text)}
+        {/* <p>{Parser(text)}</p> */}
         {/* {isCorrectUser ? ( */}
           <div>          
             <Link to={`/docs/${docId}/edit`} className="btn btn-outline-primary">
